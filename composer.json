@@ -2,6 +2,11 @@
     "name": "leakon/meituan-open",
     "description": "A php version of meituan open sdk.",
     "type": "library",
+    "license": "MIT",
+    "keywords" : [
+        "yunpian",
+        "sdk"
+    ],
     "authors": [
         {
             "name": "Likang Liu",
