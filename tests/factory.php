@@ -22,9 +22,9 @@ use SamplesRequest\Request;
 
 // var_dump($result);
 
-$config 	= [];
+$config 	= ['a' => 1];
 
 $obj 		= Factory::tuangou($config);
 
-var_dump($obj);
+print_r($obj->config);
 

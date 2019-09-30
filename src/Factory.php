@@ -3,27 +3,16 @@
 
 namespace SamplesMeituan;
 
-/**
- *
- */
-
 class Factory {
 
-    // 像 Javascript 一样，顺序检查参数列表，第一个不为 empty 的参数直接返回
-    public static function asap() {
+    public static function make($name, array $config) {
+        $namespace = Kernel\Support\Str::studly($name); 
+        $application = "\\SamplesMeituan\\{$namespace}\\Application";
+        return new $application($config);
+    }
 
-        $args       = func_get_args();
-
-        foreach ($args as $var) {
-            if (isset($var) && !empty($var)) {
-                return  $var;
-            }
-        }
-
-        $len        = count($args);
-
-        return  $len > 0 ? $args[$len - 1] : null;
-
+    public static function __callStatic($name, $arguments) {
+        return self::make($name, ...$arguments);
     }
 
 }

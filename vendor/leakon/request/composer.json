@@ -1,11 +1,10 @@
 {
-    "name": "leakon/meituan-open",
-    "description": "A php version of meituan open sdk.",
+    "name": "leakon/request",
+    "description": "Simple request object to handle http stuff.",
     "type": "library",
     "license": "MIT",
     "keywords" : [
-        "meituan",
-        "sdk"
+        "request"
     ],
     "authors": [
         {
@@ -15,13 +14,11 @@
     ],
     "minimum-stability": "dev",
     "require": {
-        "php": ">=7.2.8",
-        "leakon/request": "^1.0.0",
-        "pimple/pimple": "^3.0"
+        "php": ">=7.2.8"
     },
     "autoload": {
         "psr-4": {
-            "SamplesMeituan\\": "src/"
+            "SamplesRequest\\": "src/"
         }
     },
     "repositories": {
