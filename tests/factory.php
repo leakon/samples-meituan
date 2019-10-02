@@ -6,25 +6,33 @@ require_once __DIR__ . '/../vendor/autoload.php'; // Autoload files using Compos
 use SamplesMeituan\Factory;
 use SamplesRequest\Request;
 
-// $one        = null;
-// $two        = false;
-// $three      = 3;
+try {
 
-// $result     = Factory::asap($one, $two, $three);
+    $app_key        = isset($argv[1]) ? strval($argv[1]) : '123';
+    $secret         = isset($argv[2]) ? strval($argv[2]) : '123';
 
-// var_dump($result);
+	$config 	= [
+		'app_key'		=> '',
+		'app_secret'		=> '',
+	];
 
-// $request 		= new Request();
 
-// $url 			= 'https://localdev.intab.cn/project/secret_services/samples/project/web/youmi/api-v1.0/weixin/wxPush';
+	// $obj 		= Factory::tuangou($config);
+	$app 		= Factory::app($config);
 
-// $result 		= $request->post($url);
+	print_r($app->config);
 
-// var_dump($result);
+	$shopDeals 	= $app->tuangou->queryShopDeal();
 
-$config 	= ['a' => 1];
+	print_r($shopDeals);
 
-$obj 		= Factory::tuangou($config);
 
-print_r($obj->config);
 
+} catch (Exception $exp) {
+
+    print_r($exp);
+
+}
+
+
+echo    "\nOK\n";

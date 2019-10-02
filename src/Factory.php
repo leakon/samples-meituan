@@ -11,6 +11,10 @@ class Factory {
         return new $application($config);
     }
 
+    public static function app($config) {
+    	return 	new Application($config);
+    }
+
     public static function __callStatic($name, $arguments) {
         return self::make($name, ...$arguments);
     }

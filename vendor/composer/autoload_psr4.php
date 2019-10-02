@@ -8,5 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'SamplesRequest\\' => array($vendorDir . '/leakon/request/src'),
     'SamplesMeituan\\' => array($baseDir . '/src'),
+    'SamplesHttp\\' => array($vendorDir . '/leakon/http/src'),
     'Psr\\Container\\' => array($vendorDir . '/psr/container/src'),
 );

@@ -11,6 +11,7 @@ class ComposerStaticInite603f28e5f014bd698032565fb1c22d0
         array (
             'SamplesRequest\\' => 15,
             'SamplesMeituan\\' => 15,
+            'SamplesHttp\\' => 12,
         ),
         'P' => 
         array (
@@ -26,6 +27,10 @@ class ComposerStaticInite603f28e5f014bd698032565fb1c22d0
         'SamplesMeituan\\' => 
         array (
             0 => __DIR__ . '/../..' . '/src',
+        ),
+        'SamplesHttp\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/leakon/http/src',
         ),
         'Psr\\Container\\' => 
         array (

@@ -16,8 +16,8 @@
     "minimum-stability": "dev",
     "require": {
         "php": ">=7.2.8",
-        "leakon/request": "^1.0.0",
-        "pimple/pimple": "^3.0"
+        "pimple/pimple": "^3.0",
+        "leakon/http": "2.1"
     },
     "autoload": {
         "psr-4": {
@@ -27,7 +27,7 @@
     "repositories": {
         "packagist": {
             "type": "composer",
-            "url": "https://mirrors.aliyun.com/composer/"
+            "url": "https://packagist.phpcomposer.com"
         }
     }
 }
