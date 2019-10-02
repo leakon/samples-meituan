@@ -2,7 +2,8 @@
 
 namespace SamplesMeituan\Kernel;
 
-use SamplesRequest\Request;
+use SamplesHttp\Request;
+use SamplesMeituan\Common\Signature;
 
 /**
  * Class BaseClient.
@@ -31,7 +32,10 @@ class BaseClient
     public function __construct(ServiceContainer $app, $accessToken = null)
     {
         $this->app = $app;
-        $this->accessToken = $accessToken;
+        $this->accessToken = $app->access_token;
+
+        $this->baseUri  = $this->app->config['http']['base_uri'];
+
     }
 
     /**
@@ -129,20 +133,53 @@ class BaseClient
         //     $this->registerHttpMiddlewares();
         // }
 
+        $url            = sprintf('%s%s', $this->baseUri, $url);
+
         $request        = new Request();
 
         if ('GET' == $method) {
             $params         = $options['query'];
+            $params         = $this->addCommonParams($params);
+            $params         = $this->addSignature($params);
             $respons        = $request->get($url, $params, $options);
         } else if ('POST' == $method) {
             $params         = $options['query'];
+            $params         = $this->addCommonParams($params);
+            $params         = $this->addSignature($params);
             $respons        = $request->post($url, $params, $options);
         } else {
             throw new Exception("Http method is invalid", 1);
         }
 
+        $this->app->log->debug($url, [$params, $respons]);
+
+        $respons    = json_decode($respons, true);
+
         return $respons;
 
+    }
+
+    protected function addCommonParams($params) {
+        $timestamp      = date('Y-m-d H:i:s');
+        $app_key        = $this->app['config']['app_key'];
+        $params         = $this->accessToken->applyToParams($params);
+        $common         = [
+                            'format'            => 'json',
+                            'sign_method'       => 'MD5',
+                            'v'                 => '1',
+                            'app_key'           => $app_key,
+                            'timestamp'         => $timestamp,
+                        ];
+        $params         = array_merge($params, $common);
+        return  $params;
+    }
+
+
+    protected function addSignature($params) {
+        $app_sec      = $this->app['config']['app_secret'];
+        $sign         = Signature::getVerifySign($params, $app_sec);
+        $params['sign']     = $sign;
+        return  $params;
     }
 
 }

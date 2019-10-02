@@ -3,7 +3,7 @@
 /*
  */
 
-namespace SamplesMeituan;
+namespace SamplesMeituan\Kernel;
 
 use SamplesMeituan\Kernel\BaseAccessToken;
 
@@ -23,11 +23,9 @@ class AccessToken extends BaseAccessToken
      */
     protected function getCredentials(): array
     {
-        return [
-            'grant_type'    => 'authorization_code',
-            'app_key'       => $this->app['config']['app_key'],
-            'app_secret'    => $this->app['config']['secret'],
-            'auth_code'     => $this->app['config']['auth_code'],
-        ];
+        $default            = [
+                                'grant_type'    => 'authorization_code',
+                            ];
+        return  array_merge($default, $this->app->config->all());
     }
 }
