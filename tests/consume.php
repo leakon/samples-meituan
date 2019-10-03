@@ -15,7 +15,8 @@ try {
 
 	$app 		= Factory::app($config);
 
-	$result 	= $app->tuangou->queryConsumedReceipt($receipt);
+	$requestId 	= time();
+	$result 	= $app->tuangou->consumeReceipt($requestId, $receipt);
 
 	print_r($result);
 

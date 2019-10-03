@@ -53,9 +53,23 @@ class Client extends BaseClient
                             'app_shop_accountname'      => $appKey,
 
                         ];
-
-                        // print_r($params);
         return $this->httpPost('/router/tuangou/receipt/consume', $params);
+    }
+
+    public function revertReceipt(string $dealId, string $receiptCode, int $count = 1)
+    {
+        $appKey         = $this->app->config['app_key'];
+        $receiptCode    = $this->normalizeReceipt($receiptCode);
+        $params         = [
+                            'app_deal_id'       => $dealId,
+                            'receipt_code'      => $receiptCode,
+                            'count'             => $count,
+
+                            'app_shop_account'          => $appKey,
+                            'app_shop_accountname'      => $appKey,
+
+                        ];
+        return $this->httpPost('/router/tuangou/receipt/reverseconsume', $params);
     }
 
     public function queryDealList($date = false, int $offset = 1, int $limit = 100)
