@@ -18,9 +18,7 @@ try {
 
 	// print_r($app->config['app_key']);
 
-	$uuid 		= '73a0a604e406ee55f3789e7fa4a45c9b';
-
-	$shopDeals 	= $app->tuangou->queryShopDeal($uuid);
+	$shopDeals 	= $app->tuangou->queryShopDeal();
 
 	print_r($shopDeals);
 

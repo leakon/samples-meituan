@@ -38,6 +38,7 @@ class AccessToken extends BaseAccessToken
                                 'redirect_url'  => $conf['redirect_url'],
                                 'token_expire'  => $conf['token_expire'],
                                 'test_session'  => $conf['test_session'] ?? '',
+                                'test_refresh'  => $conf['test_refresh'] ?? '',
                             ];
 
         return  $credentials;

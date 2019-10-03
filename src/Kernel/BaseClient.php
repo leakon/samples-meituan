@@ -143,9 +143,12 @@ class BaseClient
             $params         = $this->addSignature($params);
             $respons        = $request->get($url, $params, $options);
         } else if ('POST' == $method) {
-            $params         = $options['query'];
+            $params         = $options['form_params'];
             $params         = $this->addCommonParams($params);
             $params         = $this->addSignature($params);
+            $options['http_header']     = [
+                'Content-Type: application/x-www-form-urlencoded',
+            ];
             $respons        = $request->post($url, $params, $options);
         } else {
             throw new Exception("Http method is invalid", 1);
@@ -162,18 +165,20 @@ class BaseClient
     protected function addCommonParams($params) {
         $timestamp      = date('Y-m-d H:i:s');
         $app_key        = $this->app['config']['app_key'];
+        $shop_id        = $this->app['config']['shop_id'];
         $params         = $this->accessToken->applyToParams($params);
+
         $common         = [
                             'format'            => 'json',
                             'sign_method'       => 'MD5',
                             'v'                 => '1',
                             'app_key'           => $app_key,
                             'timestamp'         => $timestamp,
+                            'open_shop_uuid'    => $shop_id,
                         ];
         $params         = array_merge($params, $common);
         return  $params;
     }
-
 
     protected function addSignature($params) {
         $app_sec      = $this->app['config']['app_secret'];
