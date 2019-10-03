@@ -5,15 +5,13 @@
 
 namespace SamplesMeituan\Kernel\Providers;
 
-use SamplesMeituan\Kernel\Config;
+use SamplesMeituan\Kernel\Logs\Monolog\Formatter\PrintR;
 use Pimple\Container;
 use Pimple\ServiceProviderInterface;
 use Monolog\Logger;
 use Monolog\Handler\StreamHandler;
 
 /**
- * Class ConfigServiceProvider.
- *
  */
 class LogServiceProvider implements ServiceProviderInterface
 {
@@ -29,8 +27,9 @@ class LogServiceProvider implements ServiceProviderInterface
     {
         $pimple['log'] = function ($app) {
             $log = new Logger('meituan-open');
-            $log->pushHandler(new StreamHandler('./logs/default.log', Logger::DEBUG));
-            // return new Config($app->getConfig());
+            $stream_handler = new StreamHandler('./logs/default.log', Logger::DEBUG);
+            $stream_handler->setFormatter( new PrintR() );
+            $log->pushHandler($stream_handler);
             return  $log;
         };
     }
