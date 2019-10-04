@@ -19,5 +19,6 @@ class ServiceProvider implements ServiceProviderInterface
         $app['tuangou'] = function ($app) {
             return new Client($app);
         };
+
     }
 }

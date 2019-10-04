@@ -327,7 +327,8 @@ abstract class BaseAccessToken
      */
     protected function getCacheKey()
     {
-        return $this->cachePrefix.md5(json_encode($this->getCredentials()));
+        $key = $this->cachePrefix.md5(json_encode($this->getCredentials()));
+        return  $key;
     }
 
     /**

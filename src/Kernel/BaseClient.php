@@ -29,7 +29,7 @@ class BaseClient
      * BaseClient constructor.
      *
      */
-    public function __construct(ServiceContainer $app, $accessToken = null)
+    public function __construct(ServiceContainer $app)
     {
         $this->app = $app;
         $this->accessToken = $app->access_token;

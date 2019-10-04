@@ -22,6 +22,14 @@ class Client extends BaseClient
         return $this->httpGet('/tuangou/deal/queryshopdeal', $params);
     }
 
+    public function queryScope(string $bid)
+    {
+        $params         = [
+                            'bid'   => $bid,
+                        ];
+        return $this->httpGet('/router/oauth/session/scope', $params);
+    }
+
     public function receiptPrepare(string $receiptCode)
     {
         $receiptCode    = $this->normalizeReceipt($receiptCode);
