@@ -37,6 +37,10 @@ class AccessToken extends BaseAccessToken
                                 'auth_code'     => $conf['auth_code'],
                                 'redirect_url'  => $conf['redirect_url'],
                                 'token_expire'  => $conf['token_expire'],
+
+                                'log_file'      => $conf['log_file'],
+                                'log_name'      => $conf['log_name'],
+
                                 'test_session'  => $conf['test_session'] ?? '',
                                 'test_refresh'  => $conf['test_refresh'] ?? '',
                             ];

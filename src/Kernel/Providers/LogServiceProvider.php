@@ -26,8 +26,10 @@ class LogServiceProvider implements ServiceProviderInterface
     public function register(Container $pimple)
     {
         $pimple['log'] = function ($app) {
-            $log = new Logger('meituan-open');
-            $stream_handler = new StreamHandler('./logs/default.log', Logger::DEBUG);
+            $logFile        = $app->config['log_file'] ?? './logs/default.log';
+            $logName        = $app->config['log_name'] ?? 'meituan-open';
+            $log = new Logger($logName);
+            $stream_handler = new StreamHandler($logFile, Logger::DEBUG);
             $stream_handler->setFormatter( new PrintR() );
             $log->pushHandler($stream_handler);
             return  $log;
